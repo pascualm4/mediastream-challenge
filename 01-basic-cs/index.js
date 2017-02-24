@@ -31,7 +31,27 @@ const assert = require('assert');
 const database = require('./database.json');
 
 
-const total = 0 // TODO
+var total = 0 // TODO
+
+var prices = [];
+for(var i = 0; i < database.length; i++)
+{
+    for(var k = 0; k < database[i].hats.length; k++)
+    {
+        prices.push(parseFloat(database[i].hats[k].price));
+    }
+    
+}
+
+for(var i = 0; i < 3; i++)
+{
+    var max =  _.max(prices);
+    total = total + max;
+    prices[_.indexOf(prices, _.max(prices))] = 0;
+}
+
+console.log(total);
+
 
 // Throws error on failure
 assert.equal(total, 23, `Invalid result: ${total} != 23`);
